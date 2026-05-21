@@ -1,0 +1,312 @@
+[
+  {
+    "id": "spin-wheel",
+    "name": "Spin the Wheel",
+    "category": "Decision & Random",
+    "description": "Create a custom spinning wheel for random decisions. Add names, options, or prizes and let fate decide.",
+    "tags": ["random", "decision", "wheel", "spinner", "games"],
+    "difficulty": 1,
+    "icon": "spinner",
+    "featured": true
+  },
+  {
+    "id": "fancy-text",
+    "name": "Fancy Text Generator",
+    "category": "Text Fun",
+    "description": "Transform plain text into stylish Unicode fonts. Copy and paste anywhere — Instagram, Twitter, TikTok bios.",
+    "tags": ["text", "font", "unicode", "instagram", "style"],
+    "difficulty": 1,
+    "icon": "text",
+    "featured": true
+  },
+  {
+    "id": "typing-test",
+    "name": "Typing Speed Test",
+    "category": "Mini Games",
+    "description": "Test your typing speed with our interactive keyboard. Get WPM, accuracy, and rank against others.",
+    "tags": ["typing", "speed", "test", "keyboard", "wpm"],
+    "difficulty": 2,
+    "icon": "keyboard",
+    "featured": true
+  },
+  {
+    "id": "color-blind-test",
+    "name": "Color Blind Challenge",
+    "category": "Mini Games",
+    "description": "Can you spot the different color? Challenge your color perception with increasing difficulty levels.",
+    "tags": ["color", "blind", "test", "vision", "challenge"],
+    "difficulty": 1,
+    "icon": "palette",
+    "featured": true
+  },
+  {
+    "id": "emoji-mixer",
+    "name": "Emoji Mixer",
+    "category": "Creative",
+    "description": "Combine two emojis to create something new. A fun alternative to Google Emoji Kitchen with unique combinations.",
+    "tags": ["emoji", "mix", "combine", "creative", "fun"],
+    "difficulty": 2,
+    "icon": "emoji",
+    "featured": true
+  },
+  {
+    "id": "random-picker",
+    "name": "Random Picker",
+    "category": "Decision & Random",
+    "description": "Enter a list of items and let the random picker choose one. Perfect for giveaways, teams, and tough decisions.",
+    "tags": ["random", "picker", "raffle", "draw", "choose"],
+    "difficulty": 1,
+    "icon": "shuffle",
+    "featured": true
+  },
+  {
+    "id": "truth-or-dare",
+    "name": "Truth or Dare",
+    "category": "Decision & Random",
+    "description": "The classic party game with hundreds of questions. Three difficulty levels: mild, medium, and spicy.",
+    "tags": ["game", "party", "truth", "dare", "fun"],
+    "difficulty": 1,
+    "icon": "dice",
+    "featured": true
+  },
+  {
+    "id": "would-you-rather",
+    "name": "Would You Rather",
+    "category": "Decision & Random",
+    "description": "Tough choices, endless debates. Vote on dilemmas and see what others chose. Great conversation starter.",
+    "tags": ["game", "choice", "dilemma", "question", "fun"],
+    "difficulty": 1,
+    "icon": "question",
+    "featured": true
+  },
+  {
+    "id": "coin-flip",
+    "name": "Coin Flip & Dice Roll",
+    "category": "Decision & Random",
+    "description": "Flip a coin or roll dice with realistic 3D physics animations. Perfect for settling bets and board games.",
+    "tags": ["coin", "flip", "dice", "roll", "random"],
+    "difficulty": 1,
+    "icon": "coin",
+    "featured": false
+  },
+  {
+    "id": "color-palette",
+    "name": "Color Palette Generator",
+    "category": "Creative",
+    "description": "Extract beautiful color palettes from any image. Get complementary colors, hex codes, and CSS gradients.",
+    "tags": ["color", "palette", "design", "gradient", "css"],
+    "difficulty": 2,
+    "icon": "palette",
+    "featured": true
+  },
+  {
+    "id": "ascii-art",
+    "name": "ASCII Art Generator",
+    "category": "Creative",
+    "description": "Convert any image into stunning ASCII art. Adjust density, contrast, and character set for unique results.",
+    "tags": ["ascii", "art", "image", "text", "convert"],
+    "difficulty": 2,
+    "icon": "grid",
+    "featured": false
+  },
+  {
+    "id": "meme-maker",
+    "name": "Meme Maker",
+    "category": "Creative",
+    "description": "Create and customize memes with popular templates. Add text, change fonts, and share directly to social media.",
+    "tags": ["meme", "image", "text", "funny", "social"],
+    "difficulty": 3,
+    "icon": "image",
+    "featured": false
+  },
+  {
+    "id": "retro-text",
+    "name": "Retro Text Generator",
+    "category": "Creative",
+    "description": "Create vaporwave, typewriter, and neon-style text effects. Unicode decorative characters with CSS filters.",
+    "tags": ["retro", "vaporwave", "text", "style", "aesthetic"],
+    "difficulty": 1,
+    "icon": "style",
+    "featured": false
+  },
+  {
+    "id": "reaction-test",
+    "name": "Reaction Time Test",
+    "category": "Mini Games",
+    "description": "How fast are your reflexes? Click when the color changes and compare your score on the global leaderboard.",
+    "tags": ["reaction", "speed", "reflex", "test", "click"],
+    "difficulty": 1,
+    "icon": "flash",
+    "featured": false
+  },
+  {
+    "id": "memory-game",
+    "name": "Memory Challenge",
+    "category": "Mini Games",
+    "description": "Remember increasingly longer sequences of numbers. Train your short-term memory with this addictive brain game.",
+    "tags": ["memory", "brain", "sequence", "number", "train"],
+    "difficulty": 1,
+    "icon": "brain",
+    "featured": false
+  },
+  {
+    "id": "iq-test",
+    "name": "Fun IQ Quiz",
+    "category": "Mini Games",
+    "description": "A light-hearted intelligence quiz with pattern recognition and logic puzzles. Get your fun IQ score instantly.",
+    "tags": ["iq", "quiz", "brain", "logic", "test"],
+    "difficulty": 2,
+    "icon": "puzzle",
+    "featured": false
+  },
+  {
+    "id": "2048",
+    "name": "2048 Game",
+    "category": "Mini Games",
+    "description": "The addictive puzzle game. Combine tiles to reach 2048. Play with keyboard or touch. Saves your best score.",
+    "tags": ["2048", "puzzle", "game", "tiles", "number"],
+    "difficulty": 2,
+    "icon": "grid",
+    "featured": false
+  },
+  {
+    "id": "bmi-calculator",
+    "name": "BMI Calculator",
+    "category": "Life Calculators",
+    "description": "Calculate your Body Mass Index instantly. Switch between metric and imperial units with a visual health scale.",
+    "tags": ["bmi", "health", "weight", "calculator", "body"],
+    "difficulty": 1,
+    "icon": "fitness",
+    "featured": false
+  },
+  {
+    "id": "tip-calculator",
+    "name": "Tip Calculator",
+    "category": "Life Calculators",
+    "description": "Calculate tips and split restaurant bills. Preset percentages for different countries and round-up options.",
+    "tags": ["tip", "calculator", "bill", "restaurant", "split"],
+    "difficulty": 1,
+    "icon": "money",
+    "featured": false
+  },
+  {
+    "id": "date-diff",
+    "name": "Date Difference Calculator",
+    "category": "Life Calculators",
+    "description": "Find the exact time between two dates. Get results in years, months, days, hours, and natural language.",
+    "tags": ["date", "time", "calculator", "difference", "duration"],
+    "difficulty": 1,
+    "icon": "calendar",
+    "featured": false
+  },
+  {
+    "id": "period-tracker",
+    "name": "Period Tracker",
+    "category": "Life Calculators",
+    "description": "Track and predict menstrual cycles. Private, local-only storage with calendar view and reminder predictions.",
+    "tags": ["period", "tracker", "calendar", "health", "cycle"],
+    "difficulty": 2,
+    "icon": "calendar",
+    "featured": false
+  },
+  {
+    "id": "water-tracker",
+    "name": "Water Intake Calculator",
+    "category": "Life Calculators",
+    "description": "Calculate your daily water needs based on weight and activity level. Track your hydration with visual progress.",
+    "tags": ["water", "hydration", "health", "calculator", "daily"],
+    "difficulty": 1,
+    "icon": "water",
+    "featured": false
+  },
+  {
+    "id": "flip-text",
+    "name": "Upside Down Text",
+    "category": "Text Fun",
+    "description": "Flip your text upside down with Unicode characters. Copy and paste to prank friends or make your bio unique.",
+    "tags": ["text", "flip", "upside", "unicode", "fun"],
+    "difficulty": 1,
+    "icon": "flip",
+    "featured": false
+  },
+  {
+    "id": "password-checker",
+    "name": "Password Strength Checker",
+    "category": "Text Fun",
+    "description": "Check how strong your password is. Get crack time estimates, improvement tips, and visual strength indicator.",
+    "tags": ["password", "security", "strength", "check", "safe"],
+    "difficulty": 2,
+    "icon": "lock",
+    "featured": false
+  },
+  {
+    "id": "fake-data",
+    "name": "Fake Data Generator",
+    "category": "Text Fun",
+    "description": "Generate realistic fake data for testing. Names, addresses, phone numbers, and more. Export as JSON or CSV.",
+    "tags": ["fake", "data", "generator", "test", "mock"],
+    "difficulty": 2,
+    "icon": "database",
+    "featured": false
+  },
+  {
+    "id": "morse-code",
+    "name": "Morse Code Translator",
+    "category": "Text Fun",
+    "description": "Translate text to Morse code and back. Listen to the telegraph sounds with Web Audio API for full immersion.",
+    "tags": ["morse", "code", "translate", "audio", "telegraph"],
+    "difficulty": 1,
+    "icon": "radio",
+    "featured": false
+  },
+  {
+    "id": "joke-generator",
+    "name": "Dad Joke Generator",
+    "category": "Text Fun",
+    "description": "Get an endless supply of dad jokes. One-click copy, share to social, and discover new groan-worthy puns.",
+    "tags": ["joke", "funny", "dad", "humor", "laugh"],
+    "difficulty": 1,
+    "icon": "smile",
+    "featured": false
+  },
+  {
+    "id": "fake-chat",
+    "name": "Fake Chat Generator",
+    "category": "Fun Generators",
+    "description": "Create realistic fake messaging screenshots. Customize avatars, names, messages, and export as images.",
+    "tags": ["fake", "chat", "message", "screenshot", "prank"],
+    "difficulty": 3,
+    "icon": "chat",
+    "featured": false
+  },
+  {
+    "id": "fake-receipt",
+    "name": "Fake Receipt Generator",
+    "category": "Fun Generators",
+    "description": "Generate custom fake receipts for pranks. Customize store name, items, prices, and download as image.",
+    "tags": ["fake", "receipt", "prank", "custom", "fun"],
+    "difficulty": 2,
+    "icon": "receipt",
+    "featured": false
+  },
+  {
+    "id": "fortune-cookie",
+    "name": "Fortune Cookie",
+    "category": "Fun Generators",
+    "description": "Crack open a virtual fortune cookie. Beautiful Chinese poetry-inspired fortunes with shareable cards.",
+    "tags": ["fortune", "luck", "cookie", "wisdom", "fun"],
+    "difficulty": 1,
+    "icon": "cookie",
+    "featured": false
+  },
+  {
+    "id": "emoji-riddle",
+    "name": "Emoji Riddles",
+    "category": "Fun Generators",
+    "description": "Guess the phrase from emoji clues! Timed rounds, hints, and increasing difficulty keep you coming back.",
+    "tags": ["emoji", "riddle", "puzzle", "guess", "game"],
+    "difficulty": 2,
+    "icon": "emoji",
+    "featured": false
+  }
+]
