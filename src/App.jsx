@@ -32,6 +32,8 @@ const MemoryGame = lazy(() => import('./pages/tools/MemoryGame'))
 const IQQuiz = lazy(() => import('./pages/tools/IQTest'))
 const Game2048 = lazy(() => import('./pages/tools/Game2048'))
 const ColorPalette = lazy(() => import('./pages/tools/ColorPalette'))
+const EmojiRiddles = lazy(() => import('./pages/tools/EmojiRiddles'))
+const PeriodTracker = lazy(() => import('./pages/tools/PeriodTracker'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 const theme = createTheme({
