@@ -27,9 +27,9 @@ const MorseCode = lazy(() => import('./pages/tools/MorseCode'))
 const JokeGenerator = lazy(() => import('./pages/tools/JokeGenerator'))
 const FortuneCookie = lazy(() => import('./pages/tools/FortuneCookie'))
 const FakeData = lazy(() => import('./pages/tools/FakeData'))
-const ReactionTest = lazy(() => import('./pages/tools/ReactionTimeTest'))
+const ReactionTest = lazy(() => import('./pages/tools/ReactionTest'))
 const MemoryGame = lazy(() => import('./pages/tools/MemoryGame'))
-const IQQuiz = lazy(() => import('./pages/tools/IQTest'))
+const IQQuiz = lazy(() => import('./pages/tools/IQQuiz'))
 const Game2048 = lazy(() => import('./pages/tools/Game2048'))
 const ColorPalette = lazy(() => import('./pages/tools/ColorPalette'))
 const EmojiRiddles = lazy(() => import('./pages/tools/EmojiRiddles'))
@@ -114,9 +114,6 @@ export default function App() {
                 <Route path="/tools/memory-game" element={<MemoryGame />} />
                 <Route path="/tools/iq-quiz" element={<IQQuiz />} />
                 <Route path="/tools/2048" element={<Game2048 />} />
-                <Route path="/tools/meme-maker" element={<MemeMaker />} />
-                <Route path="/tools/fake-chat" element={<FakeChat />} />
-                <Route path="/tools/fake-receipt" element={<FakeReceipt />} />
                 <Route path="/tools/emoji-riddles" element={<EmojiRiddles />} />
                 <Route path="/tools/period-tracker" element={<PeriodTracker />} />
                 <Route path="*" element={<NotFound />} />

@@ -1,183 +1,411 @@
-import { useState, useEffect, useCallback } from 'react'
-import { Typography, Box, Paper, Button, Stack } from '@mui/material'
-import ReplayIcon from '@mui/icons-material/Replay'
-import ToolLayout from '../../components/ToolLayout'
-import { motion } from 'framer-motion'
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
+import {
+  Box,
+  Typography,
+  Paper,
+  Button,
+  Grid,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+} from '@mui/material';
+import {
+  Replay as RestartIcon,
+  Undo as UndoIcon,
+} from '@mui/icons-material';
+import ToolLayout from '../../components/ToolLayout';
 
-const GRID = 4
+const GRID_SIZE = 4;
+const WIN_VALUE = 2048;
 
-function createGame() {
-  const board = Array.from({ length: GRID }, () => Array.from({ length: GRID }, () => 0))
-  addTile(board); addTile(board)
-  return board
-}
-
-function addTile(board) {
-  const empty = []
-  for (let r = 0; r < GRID; r++)
-    for (let c = 0; c < GRID; c++)
-      if (board[r][c] === 0) empty.push([r, c])
-  if (empty.length) {
-    const [r, c] = empty[Math.floor(Math.random() * empty.length)]
-    board[r][c] = Math.random() < 0.9 ? 2 : 4
-  }
-}
-
-function slide(row) {
-  const filtered = row.filter(v => v !== 0)
-  const merged = []
-  let score = 0
-  for (let i = 0; i < filtered.length; i++) {
-    if (i < filtered.length - 1 && filtered[i] === filtered[i + 1]) {
-      merged.push(filtered[i] * 2)
-      score += filtered[i] * 2
-      i++
-    } else {
-      merged.push(filtered[i])
+const getEmptyCells = (grid) => {
+  const empty = [];
+  for (let r = 0; r < GRID_SIZE; r++) {
+    for (let c = 0; c < GRID_SIZE; c++) {
+      if (grid[r][c] === 0) empty.push({ r, c });
     }
   }
-  while (merged.length < GRID) merged.push(0)
-  return { row: merged, score }
-}
+  return empty;
+};
 
-function moveBoard(board, direction) {
-  let newBoard = JSON.parse(JSON.stringify(board))
-  let totalScore = 0
-  const rotate = (b, times) => {
-    for (let n = 0; n < times; n++) b = b[0].map((_, i) => b.map(r => r[i]).reverse())
-    return b
-  }
-  const rotations = { left: 0, right: 2, up: 3, down: 1 }
-  newBoard = rotate(newBoard, rotations[direction])
-  for (let r = 0; r < GRID; r++) {
-    const { row, score } = slide(newBoard[r])
-    newBoard[r] = row
-    totalScore += score
-  }
-  newBoard = rotate(newBoard, (4 - rotations[direction]) % 4)
-  return { board: newBoard, score: totalScore }
-}
+const addRandomTile = (grid) => {
+  const empty = getEmptyCells(grid);
+  if (empty.length === 0) return grid;
+  const { r, c } = empty[Math.floor(Math.random() * empty.length)];
+  const newGrid = grid.map((row) => [...row]);
+  newGrid[r][c] = Math.random() < 0.9 ? 2 : 4;
+  return newGrid;
+};
 
-function boardEqual(a, b) {
-  for (let r = 0; r < GRID; r++)
-    for (let c = 0; c < GRID; c++)
-      if (a[r][c] !== b[r][c]) return false
-  return true
-}
+const createEmptyGrid = () =>
+  Array.from({ length: GRID_SIZE }, () => Array(GRID_SIZE).fill(0));
+
+const initGrid = () => {
+  let grid = createEmptyGrid();
+  grid = addRandomTile(grid);
+  grid = addRandomTile(grid);
+  return grid;
+};
+
+const slideAndMerge = (line) => {
+  const filtered = line.filter((v) => v !== 0);
+  const result = [];
+  let score = 0;
+  for (let i = 0; i < filtered.length; i++) {
+    if (i + 1 < filtered.length && filtered[i] === filtered[i + 1]) {
+      const merged = filtered[i] * 2;
+      result.push(merged);
+      score += merged;
+      i++;
+    } else {
+      result.push(filtered[i]);
+    }
+  }
+  while (result.length < GRID_SIZE) result.push(0);
+  return { line: result, score };
+};
+
+const moveGrid = (grid, direction) => {
+  let newGrid = createEmptyGrid();
+  let totalScore = 0;
+  let moved = false;
+
+  for (let i = 0; i < GRID_SIZE; i++) {
+    let line = [];
+    if (direction === 'left') {
+      line = grid[i].slice();
+    } else if (direction === 'right') {
+      line = grid[i].slice().reverse();
+    } else if (direction === 'up') {
+      for (let r = 0; r < GRID_SIZE; r++) line.push(grid[r][i]);
+    } else if (direction === 'down') {
+      for (let r = GRID_SIZE - 1; r >= 0; r--) line.push(grid[r][i]);
+    }
+
+    const { line: merged, score } = slideAndMerge(line);
+    totalScore += score;
+
+    const originalLine = direction === 'left'
+      ? grid[i]
+      : direction === 'right'
+        ? grid[i].slice().reverse()
+        : direction === 'up'
+          ? Array.from({ length: GRID_SIZE }, (_, r) => grid[r][i])
+          : Array.from({ length: GRID_SIZE }, (_, r) => grid[GRID_SIZE - 1 - r][i]);
+
+    if (merged.join(',') !== originalLine.join(',')) moved = true;
+
+    if (direction === 'left') {
+      newGrid[i] = merged;
+    } else if (direction === 'right') {
+      newGrid[i] = merged.reverse();
+    } else if (direction === 'up') {
+      for (let r = 0; r < GRID_SIZE; r++) newGrid[r][i] = merged[r];
+    } else if (direction === 'down') {
+      for (let r = 0; r < GRID_SIZE; r++) newGrid[GRID_SIZE - 1 - r][i] = merged[r];
+    }
+  }
+
+  return { grid: newGrid, score: totalScore, moved };
+};
+
+const canMove = (grid) => {
+  for (let r = 0; r < GRID_SIZE; r++) {
+    for (let c = 0; c < GRID_SIZE; c++) {
+      if (grid[r][c] === 0) return true;
+      if (c + 1 < GRID_SIZE && grid[r][c] === grid[r][c + 1]) return true;
+      if (r + 1 < GRID_SIZE && grid[r][c] === grid[r + 1][c]) return true;
+    }
+  }
+  return false;
+};
+
+const hasWon = (grid) => {
+  for (let r = 0; r < GRID_SIZE; r++) {
+    for (let c = 0; c < GRID_SIZE; c++) {
+      if (grid[r][c] >= WIN_VALUE) return true;
+    }
+  }
+  return false;
+};
 
 const TILE_COLORS = {
-  2: '#eee4da', 4: '#ede0c8', 8: '#f2b179', 16: '#f59563',
-  32: '#f67c5f', 64: '#f65e3b', 128: '#edcf72', 256: '#edcc61',
-  512: '#edc850', 1024: '#edc53f', 2048: '#edc22e',
-}
+  0: { bg: '#cdc1b4', color: 'transparent' },
+  2: { bg: '#eee4da', color: '#776e65' },
+  4: { bg: '#ede0c8', color: '#776e65' },
+  8: { bg: '#f2b179', color: '#f9f6f2' },
+  16: { bg: '#f59563', color: '#f9f6f2' },
+  32: { bg: '#f67c5f', color: '#f9f6f2' },
+  64: { bg: '#f65e3b', color: '#f9f6f2' },
+  128: { bg: '#edcf72', color: '#f9f6f2' },
+  256: { bg: '#edcc61', color: '#f9f6f2' },
+  512: { bg: '#edc850', color: '#f9f6f2' },
+  1024: { bg: '#edc53f', color: '#f9f6f2' },
+  2048: { bg: '#edc22e', color: '#f9f6f2' },
+  4096: { bg: '#3c3a32', color: '#f9f6f2' },
+  8192: { bg: '#3c3a32', color: '#f9f6f2' },
+};
 
-export default function Game2048() {
-  const [board, setBoard] = useState(() => createGame())
-  const [score, setScore] = useState(() => parseInt(localStorage.getItem('score2048')) || 0)
-  const [gameOver, setGameOver] = useState(false)
-  const [won, setWon] = useState(false)
+const getTileStyle = (value) => {
+  const colors = TILE_COLORS[value] || { bg: '#3c3a32', color: '#f9f6f2' };
+  const fontSize = value < 100 ? '2rem' : value < 1000 ? '1.6rem' : value < 10000 ? '1.2rem' : '0.9rem';
+  return {
+    width: '100%',
+    aspectRatio: '1',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.bg,
+    color: colors.color,
+    borderRadius: 6,
+    fontWeight: 'bold',
+    fontSize,
+    transition: 'all 0.1s ease-in-out',
+    userSelect: 'none',
+  };
+};
 
-  const move = useCallback((dir) => {
-    if (gameOver) return
-    const { board: newBoard, score: addScore } = moveBoard(board, dir)
-    if (boardEqual(board, newBoard)) return false
-    addTile(newBoard)
-    setBoard(newBoard)
-    const newScore = score + addScore
-    setScore(newScore)
-    if (newScore > (parseInt(localStorage.getItem('score2048')) || 0)) localStorage.setItem('score2048', newScore)
-    if (newBoard.flat().some(v => v === 2048) && !won) setWon(true)
-    const canMove = (b) => {
-      for (let r = 0; r < GRID; r++)
-        for (let c = 0; c < GRID; c++) {
-          if (b[r][c] === 0) return true
-          if (c < GRID - 1 && b[r][c] === b[r][c + 1]) return true
-          if (r < GRID - 1 && b[r][c] === b[r + 1][c]) return true
-        }
-      return false
-    }
-    if (!canMove(newBoard)) setGameOver(true)
-    return true
-  }, [board, score, gameOver, won])
+const Game2048 = () => {
+  const [grid, setGrid] = useState(initGrid);
+  const [score, setScore] = useState(0);
+  const [bestScore, setBestScore] = useState(() => {
+    const saved = localStorage.getItem('game2048_best');
+    return saved ? parseInt(saved, 10) : 0;
+  });
+  const [gameOver, setGameOver] = useState(false);
+  const [won, setWon] = useState(false);
+  const [keepPlaying, setKeepPlaying] = useState(false);
+  const [history, setHistory] = useState([]);
+  const gridRef = useRef(grid);
+  const scoreRef = useRef(score);
 
   useEffect(() => {
-    const handleKey = (e) => {
-      const map = { ArrowUp: 'up', ArrowDown: 'down', ArrowLeft: 'left', ArrowRight: 'right' }
-      if (map[e.key]) { e.preventDefault(); move(map[e.key]) }
+    gridRef.current = grid;
+    scoreRef.current = score;
+  }, [grid, score]);
+
+  const updateBestScore = useCallback((newScore) => {
+    if (newScore > bestScore) {
+      setBestScore(newScore);
+      localStorage.setItem('game2048_best', String(newScore));
     }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [move])
+  }, [bestScore]);
+
+  const executeMove = useCallback(
+    (direction) => {
+      const { grid: newGrid, score: moveScore, moved } = moveGrid(gridRef.current, direction);
+      if (!moved) return;
+
+      setHistory((prev) => [...prev, { grid: gridRef.current, score: scoreRef.current }]);
+
+      const gridWithTile = addRandomTile(newGrid);
+      const newTotalScore = scoreRef.current + moveScore;
+
+      setGrid(gridWithTile);
+      setScore(newTotalScore);
+      updateBestScore(newTotalScore);
+
+      if (hasWon(gridWithTile) && !won && !keepPlaying) {
+        setWon(true);
+      }
+
+      if (!canMove(gridWithTile)) {
+        setGameOver(true);
+      }
+    },
+    [won, keepPlaying, updateBestScore]
+  );
 
   useEffect(() => {
-    let startX = 0, startY = 0
-    const handleTouchStart = e => { startX = e.touches[0].clientX; startY = e.touches[0].clientY }
-    const handleTouchEnd = e => {
-      const dx = e.changedTouches[0].clientX - startX
-      const dy = e.changedTouches[0].clientY - startY
-      if (Math.abs(dx) < 30 && Math.abs(dy) < 30) return
-      if (Math.abs(dx) > Math.abs(dy)) move(dx > 0 ? 'right' : 'left')
-      else move(dy > 0 ? 'down' : 'up')
-    }
-    window.addEventListener('touchstart', handleTouchStart)
-    window.addEventListener('touchend', handleTouchEnd)
-    return () => { window.removeEventListener('touchstart', handleTouchStart); window.removeEventListener('touchend', handleTouchEnd) }
-  }, [move])
+    const handleKeyDown = (e) => {
+      if (gameOver) return;
+      const keyMap = {
+        ArrowUp: 'up',
+        ArrowDown: 'down',
+        ArrowLeft: 'left',
+        ArrowRight: 'right',
+        w: 'up',
+        s: 'down',
+        a: 'left',
+        d: 'right',
+        W: 'up',
+        S: 'down',
+        A: 'left',
+        D: 'right',
+      };
+      const direction = keyMap[e.key];
+      if (direction) {
+        e.preventDefault();
+        executeMove(direction);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [executeMove, gameOver]);
 
-  const reset = () => { setBoard(createGame()); setScore(0); setGameOver(false); setWon(false) }
+  // Touch support
+  const touchStart = useRef(null);
+  const handleTouchStart = (e) => {
+    const touch = e.touches[0];
+    touchStart.current = { x: touch.clientX, y: touch.clientY };
+  };
+  const handleTouchEnd = (e) => {
+    if (!touchStart.current || gameOver) return;
+    const touch = e.changedTouches[0];
+    const dx = touch.clientX - touchStart.current.x;
+    const dy = touch.clientY - touchStart.current.y;
+    const absDx = Math.abs(dx);
+    const absDy = Math.abs(dy);
+    if (Math.max(absDx, absDy) < 30) return;
+    if (absDx > absDy) {
+      executeMove(dx > 0 ? 'right' : 'left');
+    } else {
+      executeMove(dy > 0 ? 'down' : 'up');
+    }
+    touchStart.current = null;
+  };
+
+  const handleRestart = () => {
+    setGrid(initGrid());
+    setScore(0);
+    setGameOver(false);
+    setWon(false);
+    setKeepPlaying(false);
+    setHistory([]);
+  };
+
+  const handleUndo = () => {
+    if (history.length === 0) return;
+    const prev = history[history.length - 1];
+    setHistory((h) => h.slice(0, -1));
+    setGrid(prev.grid);
+    setScore(prev.score);
+  };
+
+  const handleContinue = () => {
+    setWon(false);
+    setKeepPlaying(true);
+  };
 
   return (
-    <ToolLayout title="2048 Game" description="Combine tiles to reach 2048. Use arrow keys or swipe. Saves your best score." category="Mini Games">
-      <Paper sx={{ p: 4, borderRadius: 4, textAlign: 'center' }}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center" mb={3}>
-          <Box>
-            <Typography variant="h4" fontWeight={800} color="primary.main">2048</Typography>
-            <Typography variant="caption" color="text.secondary">Use Arrow Keys</Typography>
-          </Box>
-          <Stack direction="row" spacing={2}>
-            <Paper variant="outlined" sx={{ px: 3, py: 1, borderRadius: 2, textAlign: 'center' }}>
-              <Typography variant="caption" color="text.secondary">SCORE</Typography>
-              <Typography variant="h5" fontWeight={800}>{score}</Typography>
-            </Paper>
-            <Button onClick={reset} startIcon={<ReplayIcon />} variant="outlined" size="small">New Game</Button>
-          </Stack>
-        </Stack>
+    <>
+      <Helmet>
+        <title>2048 Game - ToolFast</title>
+        <meta name="description" content="Play the classic 2048 puzzle game. Merge tiles to reach 2048!" />
+      </Helmet>
 
-        <Box
-          sx={{
-            display: 'grid', gridTemplateColumns: `repeat(${GRID}, 1fr)`,
-            gap: 1.5, bgcolor: '#bbada0', p: 1.5, borderRadius: 3,
-            maxWidth: 400, mx: 'auto', position: 'relative',
-          }}
-        >
-          {board.flat().map((val, i) => (
-            <motion.div
-              key={i}
-              initial={false}
-              layout
-              transition={{ type: 'spring', stiffness: 500, damping: 30 }}
-              style={{
-                aspectRatio: '1', borderRadius: 8, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: val > 512 ? '1.2rem' : '1.8rem', fontWeight: 800,
-                background: TILE_COLORS[val] || (val > 0 ? '#3c3a32' : 'rgba(238,228,218,0.35)'),
-                color: val <= 4 ? '#776e65' : '#f9f6f2',
+      <ToolLayout title="2048 Game" description="经典2048数字合并游戏，使用方向键或滑动来玩">
+        <Box sx={{ maxWidth: 500, mx: 'auto' }}>
+          {/* Score Header */}
+          <Paper elevation={2} sx={{ p: 2, mb: 2 }}>
+            <Grid container spacing={2} alignItems="center">
+              <Grid item xs={4}>
+                <Paper variant="outlined" sx={{ p: 1, textAlign: 'center' }}>
+                  <Typography variant="caption" color="text.secondary">分数</Typography>
+                  <Typography variant="h6" fontWeight="bold">{score}</Typography>
+                </Paper>
+              </Grid>
+              <Grid item xs={4}>
+                <Paper variant="outlined" sx={{ p: 1, textAlign: 'center' }}>
+                  <Typography variant="caption" color="text.secondary">最高分</Typography>
+                  <Typography variant="h6" fontWeight="bold" color="primary">{bestScore}</Typography>
+                </Paper>
+              </Grid>
+              <Grid item xs={4}>
+                <Button
+                  variant="contained"
+                  startIcon={<RestartIcon />}
+                  onClick={handleRestart}
+                  fullWidth
+                  size="small"
+                >
+                  新游戏
+                </Button>
+              </Grid>
+            </Grid>
+            <Box sx={{ textAlign: 'right', mt: 1 }}>
+              <Button
+                size="small"
+                startIcon={<UndoIcon />}
+                onClick={handleUndo}
+                disabled={history.length === 0}
+              >
+                撤销
+              </Button>
+            </Box>
+          </Paper>
+
+          {/* Game Board */}
+          <Paper
+            elevation={3}
+            sx={{
+              p: 2,
+              bgcolor: '#bbada0',
+              borderRadius: 2,
+              touchAction: 'none',
+            }}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: `repeat(${GRID_SIZE}, 1fr)`,
+                gap: 1.5,
               }}
             >
-              {val || ''}
-            </motion.div>
-          ))}
-        </Box>
+              {grid.map((row, r) =>
+                row.map((val, c) => (
+                  <Box key={`${r}-${c}`} sx={getTileStyle(val)}>
+                    {val !== 0 && val}
+                  </Box>
+                ))
+              )}
+            </Box>
+          </Paper>
 
-        {(gameOver || won) && (
-          <Box sx={{ mt: 3, p: 3, borderRadius: 3, bgcolor: won ? 'rgba(46,204,113,0.1)' : 'rgba(231,76,60,0.1)' }}>
-            <Typography variant="h5" fontWeight={700} color={won ? '#2ecc71' : '#e74c3c'}>
-              {won ? 'You Won!' : 'Game Over!'}
-            </Typography>
-            {won && <Typography color="text.secondary" mt={1}>Keep playing to beat your high score!</Typography>}
-            <Button onClick={reset} variant="contained" sx={{ mt: 2 }}>Play Again</Button>
-          </Box>
-        )}
-      </Paper>
-    </ToolLayout>
-  )
-}
+          <Typography variant="body2" color="text.secondary" sx={{ mt: 2, textAlign: 'center' }}>
+            使用方向键或 WASD 移动方块 | 也支持触屏滑动
+          </Typography>
+
+          {/* Win Dialog */}
+          <Dialog open={won} onClose={handleContinue}>
+            <DialogTitle>恭喜!</DialogTitle>
+            <DialogContent>
+              <Typography>你成功合并出了 2048!</Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                当前分数: {score}
+              </Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleRestart}>重新开始</Button>
+              <Button onClick={handleContinue} variant="contained">
+                继续游戏
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+          {/* Game Over Dialog */}
+          <Dialog open={gameOver}>
+            <DialogTitle>游戏结束</DialogTitle>
+            <DialogContent>
+              <Typography>没有可用的移动了!</Typography>
+              <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
+                最终分数: {score}
+              </Typography>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleRestart} variant="contained">
+                再来一局
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </Box>
+      </ToolLayout>
+    </>
+  );
+};
+
+export default Game2048;
