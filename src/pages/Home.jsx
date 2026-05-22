@@ -121,7 +121,7 @@ export default function Home() {
     <>
       <Helmet>
         <title>ToolFast — Free Online Tools, No Sign-Up Required</title>
-        <meta name="description" content="31 free online tools for creativity, decision-making, games, and calculations. No registration. No tracking. Just tools." />
+        <meta name="description" content={`${tools.length} free online tools for creativity, decision-making, games, and calculations. No registration. No tracking. Just tools.`} />
       </Helmet>
 
       {/* Hero Section */}
@@ -130,7 +130,7 @@ export default function Home() {
           <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, ease: [0.16,1,0.3,1] }}>
             {/* Badge */}
             <Chip
-              label="31 Tools · 100% Free"
+              label={`${tools.length} Tools · 100% Free`}
               size="small"
               sx={{
                 mb: 3, bgcolor: 'rgba(167,139,250,0.08)', color: '#c4b5fd',
@@ -151,7 +151,7 @@ export default function Home() {
             {/* Value Props */}
             <Box sx={{ display: 'flex', justifyContent: 'center', gap: { xs: 2, md: 5 }, mb: 6, flexWrap: 'wrap' }}>
               {[
-                { icon: <BoltIcon />, label: '31 Free Tools', color: '#a78bfa' },
+                { icon: <BoltIcon />, label: `${tools.length} Free Tools`, color: '#a78bfa' },
                 { icon: <LockOpenIcon />, label: 'No Registration', color: '#fb923c' },
                 { icon: <SpeedIcon />, label: 'Instant Access', color: '#34d399' },
               ].map((item, i) => (
@@ -173,7 +173,7 @@ export default function Home() {
       <Container maxWidth="xl" sx={{ position: 'relative', zIndex: 1 }}>
         <Box sx={{ mb: 5, display: 'flex', flexDirection: { xs: 'column', md: 'row' }, gap: 2, alignItems: 'center' }}>
           <TextField
-            placeholder="Search 31 tools..."
+            placeholder={`Search ${tools.length} tools...`}
             value={search}
             onChange={e => setSearch(e.target.value)}
             size="small"

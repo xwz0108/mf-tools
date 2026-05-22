@@ -111,7 +111,7 @@ export default function Layout({ children }) {
               <SearchIcon sx={{ color: '#8b8fa8', fontSize: 20 }} />
               {searchOpen && (
                 <InputBase
-                  placeholder="Search 31 tools..."
+                  placeholder={`Search ${tools.length} tools...`}
                   value={searchQuery}
                   onChange={(e) => {
                     setSearchQuery(e.target.value)
