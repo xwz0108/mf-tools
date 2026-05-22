@@ -13,6 +13,30 @@ const ColorBlindTest = lazy(() => import('./pages/tools/ColorBlindTest'))
 const EmojiMixer = lazy(() => import('./pages/tools/EmojiMixer'))
 const RandomPicker = lazy(() => import('./pages/tools/RandomPicker'))
 const CoinFlip = lazy(() => import('./pages/tools/CoinFlip'))
+const TruthOrDare = lazy(() => import('./pages/tools/TruthOrDare'))
+const WouldYouRather = lazy(() => import('./pages/tools/WouldYouRather'))
+const BMICalculator = lazy(() => import('./pages/tools/BMICalculator'))
+const TipCalculator = lazy(() => import('./pages/tools/TipCalculator'))
+const DateDiff = lazy(() => import('./pages/tools/DateDiff'))
+const WaterTracker = lazy(() => import('./pages/tools/WaterTracker'))
+const RetroText = lazy(() => import('./pages/tools/RetroText'))
+const AsciiArt = lazy(() => import('./pages/tools/AsciiArt'))
+const PasswordChecker = lazy(() => import('./pages/tools/PasswordChecker'))
+const UpsideDownText = lazy(() => import('./pages/tools/UpsideDownText'))
+const MorseCode = lazy(() => import('./pages/tools/MorseCode'))
+const JokeGenerator = lazy(() => import('./pages/tools/JokeGenerator'))
+const FortuneCookie = lazy(() => import('./pages/tools/FortuneCookie'))
+const FakeData = lazy(() => import('./pages/tools/FakeData'))
+const ReactionTest = lazy(() => import('./pages/tools/ReactionTest'))
+const MemoryGame = lazy(() => import('./pages/tools/MemoryGame'))
+const IQQuiz = lazy(() => import('./pages/tools/IQQuiz'))
+const Game2048 = lazy(() => import('./pages/tools/2048'))
+const MemeMaker = lazy(() => import('./pages/tools/MemeMaker'))
+const FakeChat = lazy(() => import('./pages/tools/FakeChat'))
+const FakeReceipt = lazy(() => import('./pages/tools/FakeReceipt'))
+const EmojiRiddles = lazy(() => import('./pages/tools/EmojiRiddles'))
+const PeriodTracker = lazy(() => import('./pages/tools/PeriodTracker'))
+const ColorPalette = lazy(() => import('./pages/tools/ColorPalette'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 const theme = createTheme({
@@ -74,6 +98,30 @@ export default function App() {
                 <Route path="/tools/emoji-mixer" element={<EmojiMixer />} />
                 <Route path="/tools/random-picker" element={<RandomPicker />} />
                 <Route path="/tools/coin-flip" element={<CoinFlip />} />
+                <Route path="/tools/truth-or-dare" element={<TruthOrDare />} />
+                <Route path="/tools/would-you-rather" element={<WouldYouRather />} />
+                <Route path="/tools/bmi-calculator" element={<BMICalculator />} />
+                <Route path="/tools/tip-calculator" element={<TipCalculator />} />
+                <Route path="/tools/date-diff" element={<DateDiff />} />
+                <Route path="/tools/water-tracker" element={<WaterTracker />} />
+                <Route path="/tools/retro-text" element={<RetroText />} />
+                <Route path="/tools/ascii-art" element={<AsciiArt />} />
+                <Route path="/tools/color-palette" element={<ColorPalette />} />
+                <Route path="/tools/password-checker" element={<PasswordChecker />} />
+                <Route path="/tools/upside-down-text" element={<UpsideDownText />} />
+                <Route path="/tools/morse-code" element={<MorseCode />} />
+                <Route path="/tools/joke-generator" element={<JokeGenerator />} />
+                <Route path="/tools/fortune-cookie" element={<FortuneCookie />} />
+                <Route path="/tools/fake-data" element={<FakeData />} />
+                <Route path="/tools/reaction-test" element={<ReactionTest />} />
+                <Route path="/tools/memory-game" element={<MemoryGame />} />
+                <Route path="/tools/iq-quiz" element={<IQQuiz />} />
+                <Route path="/tools/2048" element={<Game2048 />} />
+                <Route path="/tools/meme-maker" element={<MemeMaker />} />
+                <Route path="/tools/fake-chat" element={<FakeChat />} />
+                <Route path="/tools/fake-receipt" element={<FakeReceipt />} />
+                <Route path="/tools/emoji-riddles" element={<EmojiRiddles />} />
+                <Route path="/tools/period-tracker" element={<PeriodTracker />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
