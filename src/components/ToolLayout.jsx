@@ -1,7 +1,52 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
-import { Container, Typography, Box, Chip } from '@mui/material'
+import { Container, Typography, Box, Chip, Grid, Card, CardContent, Stack } from '@mui/material'
 import { motion } from 'framer-motion'
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
+import toolsData from '../data/tools.json'
+
+function RelatedTools({ path, category }) {
+  // Find current tool and related ones
+  const toolId = path.replace('/tools/', '')
+  const current = toolsData.find(t => t.id === toolId)
+  if (!current) return null
+
+  const related = toolsData
+    .filter(t => t.id !== toolId && t.category === category)
+    .slice(0, 3)
+
+  if (related.length === 0) return null
+
+  return (
+    <Box sx={{ mt: 6, pt: 4, borderTop: '1px solid rgba(255,255,255,0.06)' }}>
+      <Typography variant="h6" fontWeight={600} color="#8b8fa8" mb={2}>
+        You might also like
+      </Typography>
+      <Grid container spacing={2}>
+        {related.map(tool => (
+          <Grid item xs={12} sm={4} key={tool.id}>
+            <Card
+              component={Link}
+              to={`/tools/${tool.id}`}
+              sx={{
+                p: 2.5, display: 'block', textDecoration: 'none',
+                transition: 'all 0.2s',
+                '&:hover': { borderColor: 'rgba(167,139,250,0.3)', transform: 'translateY(-2px)' },
+              }}
+            >
+              <Typography variant="body1" fontWeight={700} color="#e8e6f0" mb={0.5} fontSize="0.9rem">
+                {tool.name}
+              </Typography>
+              <Typography variant="caption" color="#6b6f7e" sx={{ fontSize: '0.75rem', lineHeight: 1.4, display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+                {tool.description.slice(0, 80)}
+              </Typography>
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
+  )
+}
 
 export default function ToolLayout({ title, description, category, children }) {
   const location = useLocation()
@@ -81,6 +126,7 @@ export default function ToolLayout({ title, description, category, children }) {
         }}>
           {children}
         </Box>
+        <RelatedTools path={location.pathname} category={category} />
       </Container>
     </>
   )
