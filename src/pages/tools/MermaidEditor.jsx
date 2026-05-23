@@ -29,7 +29,8 @@ const TEMPLATES = {
     Mockups        :active, 2024-01-08, 2024-01-14
     section Development
     Backend        :2024-01-15, 2024-02-01
-    Frontend       :2024-01-20, 2024-02-10`
+    Frontend       :2024-01-20, 2024-02-10`,
+};
 
 export default function MermaidEditor() {
   const [code, setCode] = useState(TEMPLATES.flowchart)
