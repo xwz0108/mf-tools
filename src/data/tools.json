@@ -655,5 +655,53 @@
     "difficulty": 1,
     "icon": "money",
     "featured": false
+  },
+  {
+    "id": "headline-analyzer",
+    "name": "Headline Analyzer",
+    "category": "Developer Tools",
+    "description": "Score your headlines for SEO and engagement. Get tips to boost click-through rates and conversions.",
+    "tags": [
+      "headline",
+      "seo",
+      "copywriting",
+      "marketing",
+      "score"
+    ],
+    "difficulty": 1,
+    "icon": "trending",
+    "featured": true
+  },
+  {
+    "id": "seo-meta-tags",
+    "name": "SEO Meta Tag Generator",
+    "category": "Developer Tools",
+    "description": "Generate perfect meta tags, Open Graph, and Twitter Cards for any page. Preview how they look on Google.",
+    "tags": [
+      "seo",
+      "meta",
+      "open-graph",
+      "twitter",
+      "preview"
+    ],
+    "difficulty": 1,
+    "icon": "code",
+    "featured": true
+  },
+  {
+    "id": "website-worth",
+    "name": "Website Worth Calculator",
+    "category": "Developer Tools",
+    "description": "Estimate how much any website is worth based on traffic, domain quality, and revenue potential.",
+    "tags": [
+      "website",
+      "valuation",
+      "domain",
+      "calculator",
+      "estimate"
+    ],
+    "difficulty": 1,
+    "icon": "money",
+    "featured": true
   }
 ]

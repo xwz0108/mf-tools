@@ -46,6 +46,9 @@ const BrowserFingerprint = lazy(() => import('./pages/tools/BrowserFingerprint')
 const IPCalculator = lazy(() => import('./pages/tools/IPCalculator'))
 const AIToolComparator = lazy(() => import('./pages/tools/AIToolComparator'))
 const CommissionCalculator = lazy(() => import('./pages/tools/CommissionCalculator'))
+const HeadlineAnalyzer = lazy(() => import('./pages/tools/HeadlineAnalyzer'))
+const SEOMetaTags = lazy(() => import('./pages/tools/SEOMetaTags'))
+const WebsiteWorth = lazy(() => import('./pages/tools/WebsiteWorth'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 const theme = createTheme({
@@ -187,6 +190,9 @@ export default function App() {
                 <Route path="/tools/ip-calculator" element={<IPCalculator />} />
                 <Route path="/tools/ai-tool-comparator" element={<AIToolComparator />} />
                 <Route path="/tools/commission-calculator" element={<CommissionCalculator />} />
+                <Route path="/tools/headline-analyzer" element={<HeadlineAnalyzer />} />
+                <Route path="/tools/seo-meta-tags" element={<SEOMetaTags />} />
+                <Route path="/tools/website-worth" element={<WebsiteWorth />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
