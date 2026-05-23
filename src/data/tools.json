@@ -703,5 +703,53 @@
     "difficulty": 1,
     "icon": "money",
     "featured": true
+  },
+  {
+    "id": "keyword-density",
+    "name": "Keyword Density Checker",
+    "category": "Developer Tools",
+    "description": "Analyze keyword density for SEO content optimization. Find overused and underused keywords.",
+    "tags": [
+      "keyword",
+      "density",
+      "seo",
+      "content",
+      "optimize"
+    ],
+    "difficulty": 1,
+    "icon": "search",
+    "featured": true
+  },
+  {
+    "id": "ab-test-calculator",
+    "name": "A/B Test Calculator",
+    "category": "Developer Tools",
+    "description": "Calculate statistical significance for A/B tests. Z-score, P-value, and confidence levels.",
+    "tags": [
+      "ab-test",
+      "statistics",
+      "significance",
+      "conversion",
+      "experiment"
+    ],
+    "difficulty": 2,
+    "icon": "compare",
+    "featured": true
+  },
+  {
+    "id": "subject-tester",
+    "name": "Email Subject Line Tester",
+    "category": "Developer Tools",
+    "description": "Test email subject lines for open rate potential. Spam word check, length analysis, and improvement tips.",
+    "tags": [
+      "email",
+      "subject",
+      "marketing",
+      "spam",
+      "open-rate"
+    ],
+    "difficulty": 1,
+    "icon": "mail",
+    "featured": true
   }
 ]
