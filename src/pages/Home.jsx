@@ -163,7 +163,7 @@ export default function Home() {
 
             <Typography variant="h1" sx={{ fontSize: { xs: '2rem', md: '4rem' }, mb: 2, lineHeight: 1.1 }}>
               Tools that <span className="gradient-text">just work</span>.<br />
-              No sign-up. No ads. No nonsense.
+              No sign-up. No popup ads. No nonsense.
             </Typography>
 
             <Typography variant="body1" sx={{ fontSize: { xs: '1rem', md: '1.2rem' }, color: '#6b6f7e', mb: 5, maxWidth: 560, mx: 'auto', lineHeight: 1.6 }}>
@@ -236,7 +236,7 @@ export default function Home() {
             Why ToolFast?
           </Typography>
           <Typography variant="body1" sx={{ color: '#6b6f7e', mb: 5, maxWidth: 520, mx: 'auto' }}>
-            Useful tools should be free, fast, and private. No accounts, no tracking, no ads — just tools that work.
+            Useful tools should be free, fast, and private. No accounts, no tracking, no annoying ads — just tools that work.
           </Typography>
           <Grid container spacing={4}>
             {[
