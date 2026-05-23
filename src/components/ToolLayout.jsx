@@ -1,14 +1,51 @@
+import { useLocation } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import { Container, Typography, Box, Chip } from '@mui/material'
 import { motion } from 'framer-motion'
 
 export default function ToolLayout({ title, description, category, children }) {
+  const location = useLocation()
+  const url = `https://toolfast.xxddsses.com${location.pathname}`
+
+  const structuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebApplication',
+    name: title,
+    description: description?.slice(0, 200),
+    applicationCategory: 'UtilityApplication',
+    operatingSystem: 'Any',
+    url,
+    offers: { '@type': 'Offer', 'price': '0', 'priceCurrency': 'USD' },
+    browserRequirements: 'Requires JavaScript',
+  }
+
+  const breadcrumb = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://toolfast.xxddsses.com/' },
+      { '@type': 'ListItem', position: 2, name: title, item: url },
+    ],
+  }
+
   return (
     <>
       <Helmet>
         <title>{title} — Free Online Tool | ToolFast</title>
         <meta name="description" content={description?.slice(0, 160)} />
+        <link rel="canonical" href={url} />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={`${title} — Free Online Tool | ToolFast`} />
+        <meta property="og:description" content={description?.slice(0, 200)} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={url} />
+
+        {/* Structured Data */}
+        <script type="application/ld+json">{JSON.stringify(structuredData)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumb)}</script>
       </Helmet>
+
       <Container maxWidth="md" sx={{ pt: { xs: 4, md: 6 }, pb: 8, position: 'relative', zIndex: 1 }}>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
           <Box sx={{ mb: 4 }}>
