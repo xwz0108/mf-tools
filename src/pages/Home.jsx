@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import {
   Container, Typography, Box, Card, CardContent, Grid, Chip, TextField,
@@ -80,11 +80,11 @@ function ToolCard({ tool, index }) {
   )
 }
 
-function CategoryBento({ category, tools }) {
+function CategoryBento({ category, tools, innerRef }) {
   const cc = categoryColors[category] || categoryColors['Creative']
   const visible = tools.slice(0, 4)
   return (
-    <motion.div {...fadeUp}>
+    <motion.div {...fadeUp} ref={innerRef}>
       <Box sx={{ mb: 5 }}>
         {/* Category header */}
         <Stack direction="row" alignItems="center" spacing={1.5} mb={3}>
@@ -109,6 +109,17 @@ function CategoryBento({ category, tools }) {
 
 export default function Home() {
   const [search, setSearch] = useState('')
+  const [searchParams] = useSearchParams()
+  const categoryRefs = useRef({})
+
+  useEffect(() => {
+    const cat = searchParams.get('category')
+    if (cat && categoryRefs.current[cat]) {
+      setTimeout(() => {
+        categoryRefs.current[cat].scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }, 300)
+    }
+  }, [searchParams])
   const filtered = tools.filter(t =>
     !search || t.name.toLowerCase().includes(search.toLowerCase()) || t.description.toLowerCase().includes(search.toLowerCase())
   )
@@ -214,7 +225,7 @@ export default function Home() {
         ) : (
           /* Bento Grid by Category */
           categoriesWithTools.map(cat => (
-            <CategoryBento key={cat.name} category={cat.name} tools={cat.tools} />
+            <CategoryBento key={cat.name} category={cat.name} tools={cat.tools} innerRef={el => { categoryRefs.current[cat.name] = el }} />
           ))
         )}
       </Container>

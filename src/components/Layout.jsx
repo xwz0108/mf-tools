@@ -77,7 +77,7 @@ export default function Layout({ children }) {
                     key={cat}
                     label={cat}
                     component={Link}
-                    to="/"
+                    to={'/?category=' + encodeURIComponent(cat)}
                     variant="outlined"
                     size="small"
                     clickable
