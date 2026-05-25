@@ -12,6 +12,15 @@ const posts = [
   { slug: 'http-headers-explained', title: 'HTTP Headers Explained: A Complete Reference', desc: 'Every HTTP header you need to know. Security, caching, CORS, and more explained simply.', cat: 'Web', date: 'May 2026', tool: 'http-headers' },
   { slug: 'browser-fingerprint-guide', title: 'Understanding Browser Fingerprints — How to Check Yours', desc: 'What browser fingerprinting is, how it works, and how to see your own fingerprint.', cat: 'Privacy', date: 'May 2026', tool: 'browser-fingerprint' },
   { slug: 'ip-subnetting-guide', title: 'IP Subnetting Made Simple — CIDR Calculator Guide', desc: 'Learn subnetting the easy way. Visual CIDR guide with interactive calculator examples.', cat: 'Networking', date: 'May 2026', tool: 'ip-calculator' },
+  { slug: 'unix-timestamp-explained', title: 'Unix Timestamps Explained — Epoch Time Guide', desc: 'What is epoch time, why 1970, and how to convert timestamps to human dates.', cat: 'Fundamentals', date: 'May 2026', tool: 'timestamp-converter' },
+  { slug: 'base64-encoding-explained', title: 'Base64 Encoding Explained — Encode & Decode Guide', desc: 'Learn how Base64 works, when to use it, and why it is not encryption.', cat: 'Fundamentals', date: 'May 2026', tool: 'base64-encoder' },
+  { slug: 'url-encoding-explained', title: 'URL Encoding Explained — Why Spaces Become %20', desc: 'What is percent-encoding and when to use URL encode/decode in your code.', cat: 'Web', date: 'May 2026', tool: 'url-encoder' },
+  { slug: 'qr-codes-explained', title: 'How QR Codes Work — A Visual Explanation', desc: 'Anatomy of QR codes, error correction levels, and what data they can store.', cat: 'Fundamentals', date: 'May 2026', tool: 'qr-generator' },
+  { slug: 'uuid-guid-explained', title: 'UUID vs GUID Explained — Which Version to Use', desc: 'UUID versions compared. When to use v4 vs v7 for database primary keys.', cat: 'Coding', date: 'May 2026', tool: 'uuid-generator' },
+  { slug: 'json-explained', title: 'JSON Explained for Beginners — Format & Validate', desc: 'Complete JSON syntax guide with common mistakes and formatting tips.', cat: 'Coding', date: 'May 2026', tool: 'json-formatter' },
+  { slug: 'markdown-cheat-sheet', title: 'Markdown Cheat Sheet — Syntax & Live Preview', desc: 'Every Markdown syntax you need. Headings, lists, code blocks, tables, and more.', cat: 'Docs', date: 'May 2026', tool: 'markdown-previewer' },
+  { slug: 'ai-tool-selection-guide', title: 'How to Choose the Right AI Tool — A Framework', desc: 'Step-by-step guide to evaluating and comparing AI tools for your needs.', cat: 'AI', date: 'May 2026', tool: 'ai-tool-comparator' },
+  { slug: 'color-blindness-guide', title: 'Understanding Color Blindness — Types & Design Tips', desc: 'Learn the 3 main types of color blindness and how to design for accessibility.', cat: 'Design', date: 'May 2026', tool: 'color-blind-challenge' },
 ]
 
 export default function BlogList() {
