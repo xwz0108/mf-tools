@@ -21,6 +21,16 @@ const posts = [
   { slug: 'markdown-cheat-sheet', title: 'Markdown Cheat Sheet — Syntax & Live Preview', desc: 'Every Markdown syntax you need. Headings, lists, code blocks, tables, and more.', cat: 'Docs', date: 'May 2026', tool: 'markdown-previewer' },
   { slug: 'ai-tool-selection-guide', title: 'How to Choose the Right AI Tool — A Framework', desc: 'Step-by-step guide to evaluating and comparing AI tools for your needs.', cat: 'AI', date: 'May 2026', tool: 'ai-tool-comparator' },
   { slug: 'color-blindness-guide', title: 'Understanding Color Blindness — Types & Design Tips', desc: 'Learn the 3 main types of color blindness and how to design for accessibility.', cat: 'Design', date: 'May 2026', tool: 'color-blind-challenge' },
+  { slug: 'vercel-vs-netlify-vs-cloudflare', title: 'Vercel vs Netlify vs Cloudflare Pages — Which Wins?', desc: 'Three Jamstack platforms compared on pricing, performance, and developer experience.', cat: 'Comparison', date: 'May 2026', tool: null },
+  { slug: 'notion-vs-obsidian-vs-anytype', title: 'Notion vs Obsidian vs Anytype: Note App Comparison', desc: 'Three note-taking philosophies. Which fits your workflow?', cat: 'Comparison', date: 'May 2026', tool: null },
+  { slug: 'cursor-vs-copilot-vs-windsurf', title: 'Cursor vs GitHub Copilot vs Windsurf: AI Coding Compared', desc: 'Three AI coding assistants tested on real development work.', cat: 'Comparison', date: 'May 2026', tool: null },
+  { slug: 'supabase-vs-firebase-vs-planetscale', title: 'Supabase vs Firebase vs PlanetScale: Backend Compared', desc: 'Three backend platforms for modern apps. Pricing, databases, and features.', cat: 'Comparison', date: 'May 2026', tool: null },
+  { slug: 'figma-vs-sketch-vs-penpot', title: 'Figma vs Sketch vs Penpot: Design Tool Comparison', desc: 'Three design tools for different workflows and budgets.', cat: 'Comparison', date: 'May 2026', tool: null },
+  { slug: 'best-free-sql-formatters', title: 'Best Free SQL Formatters Online (2026 Tested)', desc: 'We tested 5 free SQL formatters. See which one comes out on top.', cat: 'Comparison', date: 'May 2026', tool: 'sql-formatter' },
+  { slug: 'best-free-jwt-debuggers', title: 'Best Free JWT Debuggers Online (2026)', desc: 'Decode and verify JWT tokens with these free online tools compared.', cat: 'Comparison', date: 'May 2026', tool: 'jwt-decoder' },
+  { slug: 'best-free-regex-testers', title: 'Best Free Regex Testers Online (2026 Compared)', desc: 'Test regex patterns with these free tools. Head-to-head comparison.', cat: 'Comparison', date: 'May 2026', tool: 'regex-visualizer' },
+  { slug: 'best-free-cron-editors', title: 'Best Free Cron Expression Editors (2026)', desc: 'Visualize cron schedules with these free tools. Side-by-side comparison.', cat: 'Comparison', date: 'May 2026', tool: 'cron-visualizer' },
+  { slug: 'top-10-free-developer-tools', title: 'Top 10 Free Developer Tools You Need in 2026', desc: 'Ten tools every developer should bookmark — all free, no sign-up.', cat: 'Comparison', date: 'May 2026', tool: null },
 ]
 
 export default function BlogList() {
