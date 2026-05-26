@@ -72,6 +72,7 @@ export default function Layout({ children }) {
             {/* Desktop Nav */}
             {!isMobile && (
               <Stack direction="row" spacing={0.5}>
+                <Chip label="🔗 AI Tools Compare" component="a" href="https://aitools.xxddsses.com/compare" target="_blank" variant="filled" size="small" clickable sx={{ fontWeight: 600, bgcolor: 'rgba(52,211,153,0.12)', color: '#6ee7b7', mr: 1 }} />
                 <Chip label="Blog" component={Link} to="/blog" variant="filled" size="small" clickable sx={{ fontWeight: 600, mr: 1 }} />
                 {categories.slice(1).map(cat => (
                   <Chip
